@@ -1,0 +1,12 @@
+print ("*"*6,                   "Welcome To Payilagam "                      ,"*"*6)
+p = input ("What's your name  : ")
+a = input ("Which year passout : ")
+i = input ("where you can found the Payilgam Institute  :")
+y = input ("Do you have any arrears : ")
+l = input ("Are you interested in which Domain : ")
+g = input (" What's your Passion : ")
+input ("WoW!! Great")
+
+r = "My Name is {} and I am {} passout .I have {} arrears.I had found payilagam Through {}.I am interested in {}.My Hobby is to Become {}"
+op = r.format(p,a,y,i,l,g)
+print(op)
