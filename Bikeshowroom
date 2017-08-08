@@ -61,8 +61,10 @@ print ("The payment method are",payment[0:3])
 user = input("Enter th payment Method  :")
 if (user == "emi"):
     print("In EMI policy we have some rules and regulations,We will discussed later")
-elif (user == "card"):
+elif (user == "Debitcard"):
     print("Great")
+elif (user == "Debitcard"):
+    print("Nice")    
 else:
     print("Okie great")
 
