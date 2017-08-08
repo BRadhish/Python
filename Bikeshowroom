@@ -1,0 +1,71 @@
+print(  "%"*8,"SHANMUGA  MOTORS ","%"*8 )
+print(" Welcome sir!!! ")
+Name = input(" Whats your Name : ")
+print ("Wow!!! Nice Name ")
+
+
+brand = input('Please Enter the Brand you like ')
+price1 = input('Please Enter the prefered price ')
+bikes =  { "yamaha":["fz","fazer","fascino"],
+           "tvs":["sport","starcity"],
+           "honda":["unicorn","CBR"]
+           }
+price=int(price1)
+if  (brand == "yamaha"):
+    print("In this Brand the available bikes are :")
+    print(bikes["yamaha"][0:4])
+    
+    if (price > 80000):
+        print("Here i display the FZ Specification")
+        print("Yamaha FZ V 2.0 Price - ₹ 81,040 onwards (Ex-showroom). It is available in 1 version. FZ V 2.0 has a mileage of 58 kmpl. Yamaha FZ V 2.0 is available in 2 different colours : Scorching Red and Panther Blac")
+    elif (price >50000):
+        print("Here i display the Fasino specification") 
+        print("Yamaha Fascino Price - ₹ 56,082 onwards (Ex-showroom). It is available in 1 version. Yamaha Fascino is available in 9 different colours : Sassy Cyan, Rouge Red, Haute White, Cool Cobalt, Tuxedo Black, Blending Blue, Fusion Red, Unite White and Mingling Cyan.")
+    elif (price >90000):
+        print("Here i display the Fazer specification")
+        print("	Fazer Fi is the semi faired version of Yamaha FZ series, carrying a design which makes it aerodynamically more efficient on the highway than its naked cousin. Fazer Fi is even the most affordable semi faired motorcycle with fuel injection and rivals Suzuki Gixxer SF, Pulsar 220F and TVS Apache RTR 200 in its price segment.")
+
+elif (brand == "tvs"):
+     print("In this Brand the available bikes are :")
+     print(bikes["tvs"][0:2])
+     if (price > 40000) : 
+        print("Here i display the Sport specification")
+        print(" TVS Sport Price - ₹ 36,705 onwards (Ex-showroom, Mumbai). It is available in 3 versions. Sport has a mileage of 95 kmpl. TVS Sport is available in 8 different colours : Indigo Streak, Emerald Green, Team Blue, Mercury Grey, Blaze Red, Volcano Red, Dazzling White and Electric Green.     ")
+     elif (price > 60000):
+        print("Here i display the Starcity specification")
+        print("star City is currently the largest selling bike of TVS in our Indian bike market. The bike has been doing really well for the past few years. Now, looking at the new stylish competitors, TVS has re-launched their reliable product. Let’s figure out the new changes.	")
+        
+elif (brand == "honda"):
+     print("In this Brand the available bikes are :")
+     print(bikes["honda"][0:2])
+     if (price > 76000):
+        print("Here i display the Unicorn specification")
+        print("Honda CB Unicorn 160 Price - ₹ 74,862 onwards (Ex-showroom, Mumbai). It is available in 2 versions. CB Unicorn 160 has a mileage of 62 kmpl and a top speed of 106 kmph. Honda CB Unicorn 160 is available in 5 different colours : Pearl Igneous Black, Imperial Red Metallic, Pearl Amazing White, Matte Axis Grey and Matte Marvel Blue Metallic.  ")
+     elif (price >100000):
+        print("Here i display the CBR specification")
+        print("The Honda CBR250R was Honda's first step in India towards entering the big bike scene in India. The bike came out as a surprise and took the market by storm. The bike appeared as an viable option to those, who wanted a powerful yet comfortable bike, which apart from frisking through traffic, also service as a superb comfortable touring motorcycle without being pain on the back. It started altogether an all new segment of 250cc	")
+     else :
+        print("No bike is available in this price range")
+     
+else:
+    print("The bike is not available")
+
+print (" Ok Sir.If you want to Purchase the bike means I need some documents")
+smart = input(" Do you Have have SmartCard : ")
+lcnse = input(" Do you Have License : ")
+adhar = input(" Do you Have Aaadharcard : ")
+print (" Great ")
+print (" Which payment method you preffer : ")
+payment=["Emi","cash","Debitcard"]
+print ("The payment method are",payment[0:3])
+user = input("Enter th payment Method  :")
+if (user == "emi"):
+    print("In EMI policy we have some rules and regulations,We will discussed later")
+elif (user == "card"):
+    print("Great")
+else:
+    print("Okie great")
+
+book = input(" When will you Book the Bike ? ")
+print(" ok sir,Thank You ")    
+
