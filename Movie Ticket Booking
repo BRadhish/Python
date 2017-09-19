@@ -1,0 +1,61 @@
+print ("*&*&*&*&*&*&*&*&*&*&* Welcome to INOX cinemas *&*&*&*&*&*&*&")
+
+
+Name=input("what is your name :")
+print("Here I list the ongoing movies in all Screens")
+screen ={
+    "VIVEGAM":"screen1",
+    "VEDHA":"screen2",
+    "MESAYAMURUKU":"screen3",
+    "TARAMANI":"screen4"
+    }
+
+for list in screen:
+    print("The ongoing movies  in INOX are ",list)    
+    a=150 
+user =input("Please select the movie :")
+if (user == "vivegam"):
+    
+    print("Now available ticket count is :",a)
+    i = input("Enter the No of  ticket you want: ")
+    user=int(i)
+    if(a>user):
+            user = a-user
+            print("Now currently available tticket is : ",user) 
+
+    
+elif (user == "vedha"):
+    print("Now available ticket count is :",a)
+    i = input("Enter the No of  ticket you want: ")
+    user=int(i)
+    if (a>user):
+            user = a-user
+            print("Now currently available tticket is : ",user) 
+
+    
+elif(user=="mesayamuruku"):
+    print("Now available ticket count is :",a)
+    i = input("Enter the No of  ticket you want: ")
+    user=int(i)
+    if(a>user):
+            user = a-user
+            print("Now currently available tticket is : ",user) 
+
+    
+elif(user=="taramani"):
+    print("Now available ticket count is :",a)
+    print("please enter the Details to enter the Movie")
+    r=input("Enter your Age :")
+    g=int(r)
+    if(g>18):
+        print("Great!you are eligible for the movie")
+    elif(g<18):
+        print("sorry only 18+ is eligible for the movie")
+    i = input("Enter the No of  ticket you want: ")
+    user=int(i)
+    if(a>user):
+            user = a-user
+            print("Now currently available tticket is : ",user)   
+else:
+    print("the movie is not available")
+       
