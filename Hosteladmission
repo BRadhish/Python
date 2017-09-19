@@ -1,0 +1,80 @@
+print("welcome to nest hostel")
+
+class student:
+    def __init__(self):
+        self.name=input("Enter your name")
+        self.department =input("enter your department")
+        self.age=input("Enter your age")
+
+    def details(self):
+        print("the student name is ",self.name,"and departmennt is",self.department,"and age is ",self.age)
+
+class application:
+    def __init__(self):
+        self.appno = input("enter your application numbet")
+        self.rno = input("enter your roomno")
+    def form(self):
+        print("The user application no is :",self.appno,"and room no is ",self.rno)
+    def footer (self):
+        print("Thank you for visiting Nest Hostel")
+
+        
+class rentdetails:
+    def withoutac(rent):
+        print("the rent of without ac is ",rent)
+    def withac(rent):
+         print("the rent of without ac is ",rent)
+    def withoacwithf(rent):
+         print("the rent of without ac AND with food is ",rent)
+    def withacwithf(rent):
+         print("the rent of with ac AND with food is ",rent)
+        
+        
+        
+    
+    
+    
+print("press 1 to enter the student details")
+print("press 2 to enter the application form")
+print("press 3 to display the rent details")
+
+
+enter = int(input("enter your choice : "))
+
+if enter ==1:
+    r = student()
+    r.details()
+    s=application()
+    s.footer()
+elif enter ==2:
+    s=application()
+    s.form()
+    s.footer()
+elif enter ==3:
+
+    print("Enter 1 to show the rent of without A/c")
+    print("Enter 2 to show the rent of with A/c")
+    print("Enter 3 to show the rent of without A/c with food")
+    print("Enter 4 to show the rent of with A/c and with food")
+    i = int(input("enter the choice"))
+    if i==1:
+            y=rentdetails
+            y.withoutac(rent=4500)
+    elif i==2:
+            y=rentdetails
+            y. withac(rent=5000)
+    elif i==3:
+            y=rentdetails
+            y.withoacwithf(rent=5500)
+    elif i==4:
+            y=rentdetails
+            y.withacwithf(rent=6000)
+    
+    print("Thank you for Visiting nest hostel")
+            
+            
+    
+     
+
+    
+    
