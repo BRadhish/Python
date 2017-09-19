@@ -1,0 +1,219 @@
+
+print( "&%$"*10,"SHANMUGA MOTORS ", "&%$"*10 )
+print(" Hello sir!!! ")
+Name = str(input(" Whats your Name : "))
+a =str(Name)
+print(("Hi  {}  Welcome to shanmuga motors ").format(Name))
+
+
+class library:
+    
+   
+    def __init__(self,bikes):
+        self.bikeslist =  bikes
+
+   
+        
+    def showbikes(self):
+        for self.bik in self.bikeslist:
+            print(self.bik)
+
+
+
+    def yamahaf(self):
+       
+        enter = input("Enter the preferred yamaha Bike:")
+        yamaha =["fz","fascino"]
+        if (enter == "fz"):
+            print(yamaha[0])
+            print("Here it describe the bike specification")
+            print("""You have selected the bike FZ .The FZ-1 is a beast inside, beauty outside model having a 998 cc, 4-cylinder engine producing 148 BHP @ 11000 rpm and a max torque of 106 NM @ 8000 rpm. ... After the engine specs, the second factor which made it uneasy for the FZ-1 to launch was its price, which is INR 11,42,999 (Ex-showroom Delhi).""")
+            
+        elif (enter == "fascino"):
+            print(yamaha[1])
+            print("Here it describe the bike specification")
+            print("""Yamaha Fascino Price - ₹ 56,082 onwards (Ex-showroom)./n It is available in 1 version./n Yamaha Fascino is available in 9 different colours : Sassy Cyan, Rouge Red, Haute White, Cool Cobalt, Tuxedo Black, Blending Blue, Fusion Red, Unite White and Mingling Cyan.""")
+
+
+    def hondaf(self):
+        
+        
+        enter = input("Enter the preferred  Honda Bike :")
+        honda =["shine","unicorn"]
+        if (enter =="shine"):
+            print(honda[0])
+            print("Here it describe the bike specification")
+            print("""Honda CB Shine Summary
+               Honda CB Sh
+               ine Price - ₹ 57,511 onwards (Ex-showroom, Mumbai). It is available in 3 versions. CB Shine has a mileage of 65 kmpl and a top speed of 100 kmph. Honda CB Shine is available in 7 different colours : Black, Geny Grey Metallic, Maple Brown Metallic, Rebel Red Metallic, Sports Red, Pearl Amazing White and Athletic Blue Metallic. """)
+        elif (enter =="unicorn"):
+            print(honda[1])
+            print("Here it describe the bike specification")
+            print(""" Honda CB Unicorn 150 Summary
+            Honda CB Unicorn 150 Price - ₹ 71,613 onwards (Ex-showroom, Mumbai). It is available in 1 version. CB Unicorn 150 has a mileage of 60 kmpl and a top speed of 101 kmph. Honda CB Unicorn 150 is available in 2 different colours : Pearl Igneous Black and Pearl Siena Red.""")
+
+
+
+    def tvsf(self):
+        
+        enter = input("Enter the preferred price you want to buy in TVS brand :")
+        
+        tvs = ["starcity","apache"]
+        if (enter =="starcity"):
+            print(tvs[0])
+            print("Here it describe the bike specification")
+            print("""TVS Star City Plus Summary
+              TVS Star
+              City Plus Price - ₹ 47,130 onwards (Ex-showr
+              oom, Mumbai). It is available in 3 versions. Star City Plus has a mileage of 86 kmpl and a top speed of 90 kmph. TVS Star City Plus is available in 10 different colours : Chocolate Gold, White Gold, Black Gold, Black Silver, Black Blue, Matte Grey, Titanium Grey, Oscar Black, Show-Stopper Blue and Celebrity Scarlett.""")
+        elif (enter =="apache"):
+            print(tvs[1])
+            print("Here it describe the bike specification")
+            print("""The Apache RTR 160 was TVS's reply to the Bajaj Pulsar 150 and the Hero CBZ and still remains a popular bike in the 150cc motorcycle segment. The bike has been priced at Rs 79,154 (ex-showroom-Delhi) and it was recently made BS-IV emission norm compliant. The styling of the bike is similar to that of the Apache RTR 180 and it was last given a design update in 2012. The sharp and sporty styling is something that helps the TVS Apache rtr 160 stand apart from its rivals. Sharp design elements, including LED DRLs with pilot lamps lend the Apache RTR 180 aggressive looks. The motorcycle also gets lot of faux carbon fibre finish panels that are a neat addition. The bike sports a semi-digital instrument cluster with a large analogue tachometer. The clear lens LED tail lamp looks unique and the black finish on the alloy wheels and engine give the bike a good contrast.""")
+        
+class showroom:
+    
+    
+    def __init__(self,bikes):
+        self.bike = bikes
+
+
+    def listbikes(self):
+        for listbike in self.bike:
+            print(listbike)
+
+
+    def lendbikes(self,userbike):
+        self.bike.remove(userbike)
+        print("The Bike is succesfully added in the showroom")
+
+    def addbikes(self,returnbike):
+        self.bike.append(returnbike)
+        print("Thank you so much for returning the bike")
+
+        
+class servicebike:
+    def __init__(self):
+        self.uname =  input("Enter name")
+        self.mobileno = input("Enter the mobile no :")
+        self.bikemodno = input("enter the bikemodno")
+        self.bikeregno = input("enter the bike register number")
+    def displaydetails(self):
+        print("The Name is : ",self.uname,"and the User mobile no is :",self.mobileno,"and bikename is",self.bikemodno,"then the bike regoster no is ",self.bikeregno)
+
+
+class details:
+    def detailsnew(self):
+        print (" Ok Sir.If you want to Purchase the bike means I need some documents")
+        print (" Oh,Please Tell me what you need ")
+        smart = input(" Do you Have have SmartCard(YES?NO) : ")
+        lcnse = input(" Do you Have License (YES?NO) : ")
+        adhar = input(" Do you Have Aaadharcard (yes/no) : ")
+        if (adhar == "yes"):
+            print("Great!!!!.You are Elligle for book the bike")
+        elif(adhar == "no"):
+            print("sorry Youu are not elligible for book the bike")
+            print(" Great ")
+            print("The available payment method are listed here ")
+        list = ["1.cash","2.Debitcard","3 .Creditcard","4.EMI"]
+        for listed in list:
+            print(listed)
+        inp = input(" Which payment method you preffer : ")
+        print("wow!!Great")
+        book = input(" When will you Book the Bike : ")
+        print(" ok sir,Thank You ")
+brand = library(["yamaha","Honda","TVS"])
+yamaha= library(["fascino","fz"])
+showroom= showroom(["yamaha","Honda","tvs"])
+honda =library(["shine","unicorn"])
+tvs= library(["starcity","apache"])
+
+  
+        
+print("Press 1 to show the brands available in shanmuga motors")
+print("Press 2 for Showroom purpose")
+print("Press 3 to service Reqest for  the bike")
+print("Press 4 to quit")
+
+
+user_in = int(input("Enter your choice :"))
+
+
+if (user_in == 1):
+     brand.showbikes()
+     select = input("Enter the brand you want to select :")
+     if (select =="yamaha"):
+        print("The avilable bike in yamaha are: ")
+        yamaha.showbikes()
+        yamaha.yamahaf()
+        
+        
+    
+        
+    
+     elif (select == "TVS"):
+    
+        print("The avilable bike in TVS are: ")
+        tvs.showbikes()
+        tvs.tvsf()
+        
+    
+     elif (select == "Honda"):
+        print("The avilable bike in Honda are: ")
+        honda.showbikes()
+        honda.hondaf()
+
+        
+elif(user_in == 2):
+       
+        print("Enter 1 to display available bikes in the showroom")
+        print("Enter 2 to Remove the bike in the showroom")
+        print("Enter 3 to Add the bike in the showroom")
+        print("Enter 4 to exit")
+
+
+        select = int(input("Enter the Number : "))
+
+        if (select == 1):
+            showroom.listbikes()
+
+        elif (select == 2):
+            userbike = input("Please enter the name of the remove bike :")
+            showroom.listbikes()
+            
+            showroom.lendbikes(userbike)
+            showroom.listbikes()
+                
+        elif (select == 3):
+            returnbikes = input("Please enter the returned bike : ")
+            showroom.listbikes()
+            showroom.addbikes(returnbikes)
+            showroom.listbikes()
+        elif (select == 4):
+            print("Thank you")
+elif (user_in == 3):
+    m=servicebike()
+    m.displaydetails()
+    print("Thank you for Giving the Service Request")
+    
+    
+else:
+    print("Thank you for Visiting Shanmuga motors")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
