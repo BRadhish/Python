@@ -1,0 +1,324 @@
+print (8*"***"," welcome to PSNACET ",8*"***")
+
+print ("press 1 for know the details of Enginnering")
+print("press 2 for know the details of Arts")
+print("press 3 for know the details of Medical")
+
+class engineering:
+    def IT():
+        it = { "hod":"Antony",
+           "phd":["Raja  (ME,PHD)","Arun(ME PHD)","Muthu (PHD)"],
+           "assoc" : ["kamal(ME)","Sangeetha(ME)"]
+             }
+        print(" Press 1 to show the HOD details")
+        print(" Press 2 to show the PHD staff details")
+        print(" Press 3 to show the Associate staff details")
+        
+        show = int(input("Enter your choice : "))
+        if show == 1:
+            print(it["hod"])
+        elif show == 2 :
+            for h in it["phd"]:
+                print(h)
+        elif show == 3 :
+            for h in it["assoc"]:
+                print(h)  
+        else:
+            print("Thank you")
+    def CSE():
+        print("WELCOME TO CSE DEPASRTMENT")
+        cse = { "hod":"RAJA",
+           "phd":["Anand (ME,PHD)","Amal(ME PHD)","Radha(PHD)"],
+           "assoc" : ["Jeeva(ME)","Sangeetha(ME)"]
+             }
+        print(" Press 1 to show the HOD details")
+        print(" Press 2 to show the PHD staff details")
+        print(" Press 3 to show the Associate staff details")
+        print("Press 4 to get the admission details")
+        
+        show = int(input("Enter your choice"))
+        if show == 1:
+            print(cse["hod"])
+        elif show == 2 :
+            for h in cse["phd"]:
+                print(h)
+        elif show == 3 :
+            for h in cse["assoc"]:
+                print(h)  
+        elif show == 4 :
+         Name = str(input(" Whats your Name : "))
+         a =str(Name)
+         mat = int(input("Enter your maths mark :"))
+         sci = int(input("Enter your science mark : "))
+         ss = int(input("Enter your  social science mark : "))
+         c  = mat+sci+ss
+         print(c)
+         if (c >250):
+             print("you are elligible for get admission")
+             print(("Congrats  {}  you are elligible for CSE department ").format(Name))
+         else:
+             print("you are not elligible for cse")
+         
+         
+    def CIVIL():
+        print("WELCOME TO CIVIL DEPASRTMENT")
+        civil = { "hod":"Latha",
+           "phd":["Gopi (ME,PHD)","Ajith(ME PHD)","pradeep(PHD)"],
+           "assoc" : ["prakash(ME)","Shanmuga(ME)"]
+             }
+        print(" Press 1 to show the HOD details")
+        print(" Press 2 to show the PHD staff details")
+        print(" Press 3 to show the Associate staff details")
+        print("Press 4 to get the admission details")
+        
+        show = int(input("Enter your choice : "))
+        if show == 1:
+            print(civil["hod"])
+        elif show == 2 :
+            for h in civil["phd"]:
+                print(h)
+        elif show == 3 :
+            for h in civil["assoc"]:
+                print(h) 
+         
+         
+        elif show == 4:
+         Name = str(input(" Whats your Name : "))
+         a =str(Name)
+         mat = int(input("Enter your maths mark: "))
+         sci = int(input("Enter your science mark : "))
+         ss = int(input("Enter your  social science mark : "))
+         c  = mat+sci+ss
+         print(c)
+         if (c >260):
+             print("you are elligible for get admission")
+             print(("Congrats  {}  you are elligible for CSE department ").format(Name))
+         else:
+             print("you are not elligible for CIVIL")
+         
+         
+         
+    def MECH():
+        print("WELCOME TO MECHANICAL DEPASRTMENT")
+        mech = { "hod":"SEKAR",
+           "phd":["Radha (ME,PHD)","Babu(ME PHD)","Doss(PHD)"],
+           "assoc" : ["sekar(ME)","siva(ME)"]
+             }
+        print(" Press 1 to show the HOD details")
+        print(" Press 2 to show the PHD staff details")
+        print(" Press 3 to show the Associate staff details")
+        print("Press 4 to get the admission details")
+        
+        show = int(input("Enter your choice : "))
+        if show == 1:
+            print(mech["hod"])
+        elif show == 2 :
+            for h in mech["phd"]:
+                print(h)
+        elif show == 3 :
+            for h in mech["assoc"]:
+                print(h) 
+         
+         
+        elif show == 4:
+         print("WELCOME TO MECH DEPASRTMENT")
+         Name = str(input(" Whats your Name :"))
+         a =str(Name)
+         mat = int(input("Enter your maths mark : "))
+         sci = int(input("Enter your science mark : "))
+         ss = int(input("Enter your  social science mark : "))
+         c  = mat+sci+ss
+         print(c)
+         if (c >280):
+             print("you are elligible for get admission")
+             print(("Congrats  {}  you are elligible for MECH department ").format(Name))
+         else:
+             print("you are not elligible for MECH")
+        
+        
+class arts:
+    
+    def __init__(self):
+        self.name =input("Enter your name")
+        self.appno = input("Enter your application number")
+        self.age =input("ENter your age")
+        self.gender = input("Enter your gender")
+        self.mark = input("Enter your 12th percentage :")
+    def form(self):
+        print("your name is ",self.name,"and your application number is ",self.appno,"and your age is ",self.age,"gender is ",self.gender,"and your cuttoff is ",self.mark)
+    def bsc(self):
+        inp = int(input("Enter your 12 th percentage : "))
+        if inp > 80:
+            print("you are elligible for the course")
+        else:
+            print("sorry!! you are Not elligible")
+    def bba(self):
+        inp = int(input("Enter your 12 th percentage : "))
+        if inp > 60:
+            print("you are elligible for the course")
+        else:
+            print("sorry!! you are Not elligible")
+    def msc(self):
+        inp = int(input("Enter your 12 th percentage :"))
+        if inp > 70:
+            print("you are elligible for the course")
+        else:
+            print("sorry!! you are Not elligible")
+  
+
+class rentdetails:
+    def withoutac(rent):
+        print("the rent of without ac is ",rent)
+    def withac(rent):
+         print("the rent of without ac is ",rent)
+    def withoacwithf(rent):
+         print("the rent of without ac AND with food is ",rent)
+    def withacwithf(rent):
+         print("the rent of with ac AND with food is ",rent)
+class artsfee:
+    def bscf(rent):
+        print("the fee for BSC course is  ",rent)
+    def mscf(rent):
+         print("the fee for MSC course is  ",rent)
+    def bbaf(rent):
+         print("the fee for BBA course is  ",rent)
+    
+class hostelspec :
+    def fees() :
+        
+        choice = input("Are you willing to join Hostel").lower()
+        if choice == "yes":
+    
+            print("Enter 1 to show the rent of without A/c")
+            print("Enter 2 to show the rent of with A/c")
+            print("Enter 3 to show the rent of without A/c with food")
+            print("Enter 4 to show the rent of with A/c and with food")
+            i = int(input("enter the choice"))
+            if i==1:
+                y=rentdetails
+                y.withoutac(rent=4500)
+            elif i==2:
+                y=rentdetails
+                y. withac(rent=5000)
+            elif i==3:
+                y=rentdetails
+                y.withoacwithf(rent=5500)
+            elif i==4:
+                y=rentdetails
+                y.withacwithf(rent=6000)
+            elif choice == "no":
+                print("Thank you visiting the PSNA portal")
+
+user_choice = int(input("Enter Your Choice : "))
+if user_choice == 1 :
+            print("welcome to Enginnering portal")
+            avail = input("DId you want to see the Available COurses(YES?NO) : ").lower()
+            if avail == "yes":
+                print("The available courses in Engineering are Listed Below")
+                eng_list = ["1 .IT","2 .CSE","3 .civil","4 .Mech"]
+                for g in eng_list:
+                    print(g)
+            print("Enter 1 to show the IT details")
+            print("Enter 2 to show the CSE details")
+            print("Enter 3 to show the CIVIL details")
+            print("Enter 4 to show the MECH details")
+            print("Enter 5 to Show the HOstel fee structure")
+            choice = int(input("enter your choice"))
+            if choice == 1:
+                engineering.IT()
+                hostelspec.fees()
+            elif choice == 2:
+                engineering.CSE()
+                hostelspec.fees()
+            elif choice == 3:
+                engineering.CIVIL()
+                hostelspec.fees()
+            elif choice == 4:
+                engineering.MECH()
+                hostelspec.fees()
+            elif choice == 5:
+                hostelspec.fees()
+                
+                
+            elif avail == "no":
+                
+                print("Thank you for Visiting PSNA Portal")
+            
+                 
+            
+elif user_choice == 2 :
+            print("welcome to Arts portal")
+            avail = input("DId you want to see the Available COurses(YES/NO)  : ").lower()
+            if avail == "yes":
+                print("The available courses Arts are Listed Below")
+                eng_list = ["1 .BSC","2 .MSC","3 .BBA"]
+                for g in eng_list:
+                    print(g)
+                print("Enter 1 to enter the BSC application form")
+                print("Enter 2 to enter the MSC application form")
+                print("Enter 3 to enter the BBA application form")
+                print("Enter 4 to know the fee structure")
+                user = int(input("ENter your choice : "))
+                if user == 1:
+                    r=arts()
+                    r.form()
+                    print("The details are stored in our Databses")
+                    print("once you get Shorlisted we will intiate through SMS")
+                    no = int(input("Enter your mobile no : "))
+                    print(("we will send message to this number :{}").format(no))
+                    hostelspec.fees()
+                elif user == 2:
+                    r=arts()
+                    r.msc()
+                    print("The details are stored in our Databses")
+                    print("once you get Shorlisted we will intiate through SMS")
+                    no = int(input("Enter your mobile no: "))
+                    hostelspec.fees()
+                    
+                    print(("we will send message to this number :{}").format(no))
+                elif user == 3:
+                    r=arts()
+                    r.bba()
+                    print("The details are stored in our Databses")
+                    print("once you get Shorlisted we will intiate through SMS")
+                    no = int(input("Enter your mobile no: "))
+                    print(("we will send message to this number :{}").format(no))
+                    hostelspec.fees()
+                elif user == 4:
+                        print("Enter 1 to show the BSC fees")
+                        print("Enter 2 to show the MSC fees")
+                        print("Enter 3 to show the BBA fees")
+                        print("Enter 4 to show the Hostel fees")
+                    
+                        
+                        i = int(input("enter the choice"))
+                        if i==1:
+                            y=artsfee
+                            y.bscf(rent=14500)
+                        elif i==2:
+                            y=rentdetails
+                            y. mscf(rent=25000)
+                        elif i==3:
+                            y=rentdetails
+                            y.bbaf(rent=52500)
+
+                        elif i == 4:
+                            hostelspec.fees()
+                
+                
+                        elif choice == "no":
+                            print("Thank you visiting the PSNA portal")
+
+            elif avail == "no":
+                
+                print("Thank you for Visiting PSNA Portal")
+            
+if user_choice == 3 :
+            print("welcome to Medical portal")
+            i=input("Are you want to know the medical details (YES/NO) :").lower()
+            if i == "yes":
+                print("The website is under Working process")
+            else:
+                print("Thank you for visiting PSNA website")
+                
+            
