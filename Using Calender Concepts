@@ -1,0 +1,21 @@
+import calendar
+
+print("Press 1.To Print the November 2017 calender")
+print("Press 2. To check the No of leap days inbetween 2017 to 2032")
+print("press 3 to check the 2052 is leap or not")
+
+user = input("Enter your choice  :  ")
+if user == "1":
+   cal = calendar.month(2017,11)
+   print ("Here is the calendar:")
+   print (cal)
+if user == "2":
+   t=calendar.leapdays(2017,2032)
+   print("It consist of " ,t ,"days")
+if user == "3":
+   u=calendar.isleap(2057)
+   print("The Result is ",u)
+   if u == True:
+      print("it is a leap year")
+   else :
+      print("It is not a leap year")
