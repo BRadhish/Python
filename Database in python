@@ -1,0 +1,76 @@
+import MySQLdb
+
+
+db = MySQLdb.connect("localhost","radhish","test123","TESTDB" )    //Open database connection
+
+
+cursor = db.cursor()                                               //prepare a cursor object using cursor() method
+
+.
+cursor.execute("SELECT VERSION()")                                 //execute SQL query using execute() method
+
+
+data = cursor.fetchone()                                           //Fetch a single row using fetchone() method.
+print ("Database version : %s " % data)
+
+
+db.close()                                                         //disconnect from server
+
+
+
+
+
+
+                                                                   //Create table as per requirement
+data = """CREATE TABLE student (
+         FIRST_NAME  CHAR(20) NOT NULL,
+         LAST_NAME  CHAR(20),
+         AGE INT,  
+         SEX CHAR(1),
+         INCOME FLOAT )"""
+
+
+cursor.execute(data)                                               //Execute the database
+
+
+
+
+sql = """INSERT INTO data(FIRST_NAME,                                //Prepare SQL query to INSERT a record into the database.
+         LAST_NAME, AGE, SEX, INCOME)
+         VALUES ('Arjun', 'Ramasamy', 20, 'M', 2000)"""
+try:                                                                 //Here using exception Handling concepts to find the errors
+   
+   cursor.execute(data)
+  
+   db.commit()                                                       // Commit(save) your changes in the database                                                       
+except:
+   db.rollback()                                                     //Rollback incase any error occurs     
+   
+   
+   
+ # prepare a cursor object using cursor() method
+cursor = db.cursor()
+
+sql = "SELECT * FROM EMPLOYEE \
+       WHERE INCOME > '%d'" % (1000)
+try:
+   
+   cursor.execute(data)
+  
+   details = cursor.fetchall()                                         //Fetch all the rows in a list of lists.
+   for row in details:                                                 //Using For loop to print the data 
+      fname = row[0]
+      lname = row[1]
+      age = row[2]
+      sex = row[3]
+      income = row[4]
+   
+      print "fname=%s,lname=%s,age=%d,sex=%s,income=%d" % \            //Now print fetched result
+             (fname, lname, age, sex, income )
+except:
+   print "Error: unable to fecth data"
+   
+   
+   
+  
+db.close()                                                             //disconnect from server
