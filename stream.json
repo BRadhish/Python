@@ -1,0 +1,42 @@
+
+"""
+
+
+{
+  "stackname": "Bucketstack",
+  "template": {
+    "Parameters": {
+        "BucketName": {
+            "Type": "String",
+            "Description": "The prefix used for all S3 buckets."
+        }
+    },
+    "Resources": {
+        "Assets": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+                "BucketName": {
+                    "Fn::Sub": "${BucketName}"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Sub": "${BucketName}"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}, 
+  "action": "create",
+  "parameter": [
+    {
+      "ParameterKey": "BucketName",
+      "ParameterValue": "radhBucket"
+    }
+  ]
+}
+
+"""
