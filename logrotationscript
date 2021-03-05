@@ -1,0 +1,148 @@
+Zoo keeper log rotation script set up:
+
+
+Step: 1 
+
+
+Application-specific configuration file information are kept at below location
+
+/home/ec2-user/zookeeper/conf
+
+File name: zoo.cfg 
+
+# The number of milliseconds of each tick
+tickTime=2000
+# The number of ticks that the initial 
+# synchronization phase can take
+initLimit=10
+# The number of ticks that can pass between 
+# sending a request and getting an acknowledgement
+syncLimit=5
+# the directory where the snapshot is stored.
+# do not use /tmp for storage, /tmp here is just 
+# example sakes.
+dataDir=/opt/zookeeper
+# the port at which the clients will connect
+clientPort=2181
+# the maximum number of client connections.
+# increase this if you need to handle more clients
+maxClientCnxns=100
+
+server.1=172.31.18.146:2888:3888
+server.2=172.31.16.46:2888:3888
+server.3=0.0.0.0:2888:3888
+server.4=172.31.31.243:2888:3888
+server.5=172.31.25.69:2888:3888
+
+
+
+Step:2:
+
+Zoo keeper log4jproperties configurations should be configured here
+/home/ec2-user/zookeeper/conf
+
+
+
+Filename: log4j.properties
+
+
+# Define some default values that can be overridden by system properties
+zookeeper.root.logger=INFO, CONSOLE
+zookeeper.console.threshold=INFO
+zookeeper.log.dir=/var/log/zookeeper
+zookeeper.log.file=zookeeper.log
+zookeeper.log.threshold=DEBUG
+zookeeper.tracelog.dir=/var/log/zookeeper
+zookeeper.tracelog.file=zookeeper_trace.log
+
+#
+# ZooKeeper Logging Configuration
+#
+
+# Format is "<default threshold> (, <appender>)+
+
+# DEFAULT: console appender only
+log4j.rootLogger=${zookeeper.root.logger}
+
+# Example with rolling log file
+#log4j.rootLogger=DEBUG, CONSOLE, ROLLINGFILE
+
+# Example with rolling log file and tracing
+log4j.rootLogger=INFO, ROLLINGFILE
+
+#
+# Log INFO level and above messages to the console
+#
+log4j.appender.CONSOLE=org.apache.log4j.ConsoleAppender
+log4j.appender.CONSOLE.Threshold=${zookeeper.console.threshold}
+log4j.appender.CONSOLE.layout=org.apache.log4j.PatternLayout
+log4j.appender.CONSOLE.layout.ConversionPattern=%d{ISO8601} [myid:%X{myid}] - %-5p [%t:%C{1}@%L] - %m%n
+
+#
+# Add ROLLINGFILE to rootLogger to get log file output
+#    Log DEBUG level and above messages to a log file
+log4j.appender.ROLLINGFILE=org.apache.log4j.RollingFileAppender
+log4j.appender.ROLLINGFILE.Threshold=${zookeeper.log.threshold}
+log4j.appender.ROLLINGFILE.File=${zookeeper.log.dir}/${zookeeper.log.file}
+
+# Max log file size of 10MB
+log4j.appender.ROLLINGFILE.MaxFileSize=10MB
+# uncomment the next line to limit number of backup files
+log4j.appender.ROLLINGFILE.MaxBackupIndex=10
+
+log4j.appender.ROLLINGFILE.layout=org.apache.log4j.PatternLayout
+log4j.appender.ROLLINGFILE.layout.ConversionPattern=%d{ISO8601} [myid:%X{myid}] - %-5p [%t:%C{1}@%L] - %m%n
+
+
+#
+# Add TRACEFILE to rootLogger to get log file output
+#    Log DEBUG level and above messages to a log file
+log4j.appender.TRACEFILE=org.apache.log4j.FileAppender
+log4j.appender.TRACEFILE.Threshold=TRACE
+log4j.appender.TRACEFILE.File=${zookeeper.tracelog.dir}/${zookeeper.tracelog.file}
+
+log4j.appender.TRACEFILE.layout=org.apache.log4j.PatternLayout
+### Notice we are including log4j's NDC here (%x)
+log4j.appender.TRACEFILE.layout.ConversionPattern=%d{ISO8601} [myid:%X{myid}] - %-5p [%t:%C{1}@%L][%x] - %m%n
+
+
+Step: 3 
+Zookeeper log rotation script should be placed in below path
+
+/home/ec2-user/zookeeper/conf
+
+
+Filename:zookeeper.logrotate
+Script:
+/var/log/zookeeper/*.log {
+  rotate 2
+  daily
+  size 1G
+  copytruncate
+  missingok
+  notifempty
+  nocreate
+  nomail
+  compress
+  dateformat -%Y-%m-%d-%s
+  dateext
+}
+
+
+Notes:
+
+Rotated Logs are stored in below location in 
+
+/var/logs/zookeeper
+Example: zookeeper.log-2021-01-28-1611813923.gz , zookeeper.log-2021-01-28-1611828458.gz
+
+
+To execute zookeeper log rotation script manually, below command need to be executed 
+logrotate -f [Filename]
+
+Example:
+logrotate -f zookeeper.logrotate
+
+Status check:( Log rotation status)
+cat /var/lib/logrotate/logrotate.status
+
