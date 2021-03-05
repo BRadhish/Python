@@ -1,0 +1,284 @@
+Mongo DB Cluster Automation Using Scheduled Triggers for Pause/ Resume operation automatically
+Created by RADHISH BABU
+Last updated Feb 04, 20217 min read3 people viewed3 people viewed
+
+DO-6719: Mongo DB atlas cluster start and stop script
+DONE
+Updated 22 days ago
+5
+2
+Jira
+
+Summary:
+RCE team wants to automatically pause/resume the mongo DB atlas cluster at the scheduled time
+Method 1: How to pause/resume the atlas cluster through the terminal
+
+Method 2: How to pause/resume the atlas cluster through the scheduled triggers
+
+Method 1:
+
+mongodbatlas needs to be installed on our machine 
+
+
+pip install mongodbatlas
+Now you will have script installed called atlascli. To test the install worked run atlascli -h
+
+To make this script work, you will need a programmatic key for your cluster
+
+The programmatic key has two parts a public key and a private key. Both of these are used by the atlascli program to query the projects and clusters associated with the organization.
+
+ATLAS_PUBLIC_KEY : stores the public key part of the programmatic key
+
+ATLAS_PRIVATE_KEY : stores the private part of the programmatic key
+
+Once you have created these environment variables you can run atlascli --list to list the organization and its associated projects and clusters
+
+
+radhishbabu@Administrators-MacBook-Pro ~ % atlascli --list                                              
+
+{'id': '5e90a221bc7b22728e4f9db8',
+ 'isDeleted': False,
+ 'links': [{'href': 'https://cloud.mongodb.com/api/atlas/v1.0/orgs/5e90a221bc7b22728e4f9db8',
+            'rel': 'self'}],
+ 'name': 'Galactus Funware Technology Private Limited'}
+Organization ID:5e90a221bc7b22728e4f9db8 Name:'Galactus Funware Technology Private Limited'
+     project ID:5f7acd58abe79b7cdc9c5768 Name:'mpl-ludo-staging'
+       Cluster ID:'5f7b0ec8b7338b367da213f9' name:'MPL-Ludo-Tracking'      state=running
+       Cluster ID:'5f7b0e74b7338b367da20fbe' name:'MPL-Ludo-Staging'       state=running
+       Cluster ID:'6017fc1eb5452d60da295793' name:'radhishCluster'         state=paused
+ 
+
+To resume a cluster you will need to specify the project ID and the cluster name. 
+
+
+radhishbabu@Administrators-MacBook-Pro ~ % atlascli --project_id 5f7acd58abe79b7cdc9c5768 --resume radhishCluster
+
+Resuming cluster 'radhishCluster'
+Resumed cluster 'radhishCluster'
+ 
+
+Step:1 ( Generate API key)
+
+At the Organization level (not the Project level), select Access Manager from the menu on the left
+
+Then select the API Keys tab
+
+Click Next and make a note of your Private Key
+
+Let’s next whitelist the IPs of the Realm servers that will be using our key. Click Add Whitelist Entry (Here you have to add your machine IP address or All option based on your requirement)
+
+ 
+
+Method: 2
+
+Follow the above same steps to  Generate API key
+
+Step: 2 Create Trigger: (Scheduled Pause )
+
+To pause and resume a cluster is supported by the Modify cluster API. To begin, select Triggers from the menu on the left
+
+
+ 
+
+And add a trigger
+
+Set the Trigger Type to Scheduled and the name to pauseClusters
+
+
+Select Advanced and set the CRON schedule to 0 23 * * * ( Time needs to be set based on the requirements)
+
+Note: The time is in GMT, so adjust accordingly for your timezone. As this cluster is running in Mumbai, I’m going to add 5 hours
+
+Step:3 ( Linking the trigger to the cluster )
+
+The next step is to link the trigger to the cluster, and it’s important to link to the cluster we identified above that will always be running. I created a radhishcluster called Automation for this purpose
+
+Once the cluster is linked for the first trigger, the cluster will not need to be re-linked for additional triggers created in the same project.
+
+Finally, we need to provide the function that will run when the trigger fires. Replace the provided function code with the following, filling in the value for your projectID and clusterNames. Note the function as written can pause multiple clusters, providing the cluster names as an array:
+
+
+exports = async function() {
+  
+  // Supply projectID and clusterNames...
+  const projectID = '5f7acd58abe79b7cdc9c5768';
+  const clusterNames = ['radhishCluster'];
+
+  // Get stored credentials...
+  const username = context.values.get("AtlasPublicKey");
+  const password = context.values.get("AtlasPrivateKey");
+
+  // Set desired state...
+  const body = {paused: true};
+
+  var result = "";
+  
+  clusterNames.forEach(async function (name) {
+    result = await context.functions.execute('modifyCluster', username, password, projectID, name, body)
+    console.log("Cluster " + name + ": " + EJSON.stringify(result));
+    
+    if (result.error) { 
+      return result;
+    }
+  })
+
+
+  return clusterNames.length + " clusters paused"; 
+};
+ 
+
+And Save the trigger
+
+If you attempt to run the trigger, it will fail because it’s looking up values and calling a wrapper function, modifyCluster, we haven’t written yet.
+
+Step:4 (Supply Atlas Credentials and Implement modifyCluster)
+
+ 
+
+When we created the Atlas Trigger, behind the scenes, a Realm application was created to run the trigger. It’s in that application where we’ll host our Atlas credentials and modifycluster function.
+
+And you’ll find a Triggers_RealmApp has been created for us by mongodb
+
+ 
+
+
+Click the Triggers_RealmApp to open the application
+
+ 
+
+Step:5  ( Creating Atlas credentials)
+
+Our Atlas Trigger references two values that represent our Atlas credentials, the AtlasPublicKey and AtlasPrivateKey. Here’s where we’ll supply those values to the trigger.
+
+Select Values & Secrets from the menu on the left
+
+
+Click the Create New Value button
+
+Set the Value Name to AtlasPublicKey and enter the public key value you generated earlier, enclosed in quotes
+
+
+ 
+
+Click Save
+
+ 
+
+Step:6 (AtlasPrivateKey)
+
+Add a second Value named AtlasPrivateKey, this time of type Secret
+
+Click Save
+
+ 
+
+Step:7 ( modifyCluster Function )
+I’m only demonstrating a couple of things you can do with cluster automation, but the sky is really limitless. The following modifyCluster function is a generic wrapper around the Modify Cluster API for calling the API from Realm (or Node.js for that matter).
+
+
+Open the app and select Functions from the menu on the left
+
+Leave the other fields at their defaults and click Save to open the Function Editor. Paste the following code into the editor
+
+
+
+exports = async function(username, password, projectID, clusterName, body) {
+  
+  const arg = { 
+    scheme: 'https', 
+    host: 'cloud.mongodb.com', 
+    path: 'api/atlas/v1.0/groups/' + projectID + '/clusters/' + clusterName, 
+    username: username, 
+    password: password,
+    headers: {'Content-Type': ['application/json'], 'Accept-Encoding': ['bzip, deflate']}, 
+    digestAuth:true,
+    body: JSON.stringify(body)
+  };
+  
+  // The response body is a BSON.Binary object. Parse it and return.
+  response = await context.http.patch(arg);
+
+  return EJSON.parse(response.body.text()); 
+};
+ This is simply a generic wrapper around the modify cluster API. Save the function then click REVIEW & DEPLOY CHANGES
+
+
+Step:7 ( Test the Trigger )
+
+Open your pauseClusters trigger and click Run to test it.
+
+Step:8 ( Resume the Cluster) 
+
+Add a new Atlas scheduled trigger named resumeClusters. Set the CRON schedule to: 0 2 * * 1-5.The Next Events validates for us this is exactly what we want
+
+The function code is almost identical to pauseCluster. We simply set paused to false and update our return statement to indicate clusters were resumed
+
+
+exports = async function() {
+  
+  // Supply projectID and clusterNames...
+  const projectID = '5f7acd58abe79b7cdc9c5768';
+  const clusterNames = ['radhishCluster'];
+
+  // Get stored credentials...
+  const username = context.values.get("AtlasPublicKey");
+  const password = context.values.get("AtlasPrivateKey");
+
+  // Set desired state...
+  const body = {paused: false};
+
+  var result = "";
+  
+  clusterNames.forEach(async function (name) {
+    result = await context.functions.execute('modifyCluster', username, password, projectID, name, body)
+    console.log("Cluster " + name + ": " + EJSON.stringify(result));
+    
+    if (result.error) { 
+      return result;
+    }
+  })
+
+
+  return clusterNames.length + " clusters resumed"; 
+};
+ 
+
+Pause operation will run at 8.30 PM from Monday to Friday
+Resume operation will run at 7.30 AM from Monday to Friday
+
+Realm Request Pricing:
+Realm Requests, which measures the number of requests that MongoDB Realm sends and receives from client applications and external services. Requests include function calls, trigger executions, and sync updates, but exclude user authentication
+
+
+Realm counts the number of requests that an application receives and handles. Authentication provider requests do not count towards your monthly usage.
+
+Requests are billed at a set rate for each request. There are three primary types of request:
+
+Function Executions, such as when a user calls a function from a client app or when a function calls an external service. If an executing function calls another function, Realm considers both executions as part of the same request.
+
+Trigger Executions, such as when a database trigger matches a change event, a scheduled trigger is configured to fire, or an authentication triggers responds to a user login.
+
+GraphQL Requests, such as when a client application issues a GraphQL query operation or calls a custom resolver.
+
+Webhook Requests, such as when an external service sends a notification event or interaction payload to an incoming webhook URL.
+
+Sync Operations, such as when a sync client uploads a changeset, when Realm resolves a conflict in an uploaded changeset, or when Realm sends changesets to a connected sync client.
+
+For more information on sync operations, see Realm Sync Protocol.
+
+Price: $2.00 / 1,000,000 requests ($0.000002 / request)
+
+Formula: (Function Executions + Trigger Executions + GraphQL/Webhook Requests + Sync Updates) * $0.000002
+
+Free Tier Threshold: 1,000,000 requests or 500 hours of compute or 10,000 hours of sync runtime (whichever occurs first)
+
+Ref: https://docs.mongodb.com/realm/billing
+
+
+ 
+
+Number of Realm request can be tracked here
+
+
+Logs can be viewed here 
+
