@@ -2,15 +2,9 @@ Mongo DB Cluster Automation Using Scheduled Triggers for Pause/ Resume operation
 Created by RADHISH BABU
 Last updated Feb 04, 20217 min read3 people viewed3 people viewed
 
-DO-6719: Mongo DB atlas cluster start and stop script
-DONE
-Updated 22 days ago
-5
-2
-Jira
 
 Summary:
-RCE team wants to automatically pause/resume the mongo DB atlas cluster at the scheduled time
+
 Method 1: How to pause/resume the atlas cluster through the terminal
 
 Method 2: How to pause/resume the atlas cluster through the scheduled triggers
